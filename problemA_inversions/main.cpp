@@ -43,6 +43,36 @@ Your algorithm should scale to large n.
 using namespace std;
 using ll = long long;
 
+ll mergeandcount(vector<long long>& arr, vector<long long>& temp, int left, int mid, int right) {
+    int i = left;
+    int j = mid +1;
+    int k = left;
+    ll inv_count = 0;
+    while (i <= mid && j <= right) {
+        if (arr[i] <= arr[j]){
+            temp[k] = arr[i];
+            i++;
+            k++;
+        } else if (arr[i] > arr[j]) {
+            temp[k] = arr[j];
+            j++;
+            k++;
+            inv_count += (mid-i+1);
+        };
+    }; while (i <= mid) {
+        temp[k] = arr[i];
+        i++;
+        k++;
+    } while (j <= right) {
+        temp[k] = arr[j];
+        j++;
+        k++;
+    } for (int idx = left; idx <= right; idx++) {
+        arr[idx] = temp[idx];
+    };
+    return inv_count;
+};
+
 ll mergesortandcount(vector<long long>& arr, vector<long long>& temp, int left, int right) {
     ll inv_count = 0;
     if (left < right) {
@@ -53,20 +83,3 @@ ll mergesortandcount(vector<long long>& arr, vector<long long>& temp, int left, 
     };
     return inv_count;
 };
-
-ll mergeandcount(vector<long long>& arr, vector<long long>& temp, int left, int mid, int right) {
-    int i = left;
-    int j = mid +1;
-    int k = left;
-    ll inv_count = 0;
-    while (i <= mid && j <= right) {
-        if (arr[i] <= arr[j]){
-
-        } else if (arr[i] > arr[j]) {
-
-        }
-    };
-};
-/* if (left >= right){
-return 0;
-}*/
