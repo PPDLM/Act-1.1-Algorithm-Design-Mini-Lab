@@ -83,3 +83,24 @@ ll mergesortandcount(vector<long long>& arr, vector<long long>& temp, int left, 
     };
     return inv_count;
 };
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    int n;
+    if (!(cin >> n)) return 0;
+
+    vector<long long> a(n);
+    for (int i = 0; i < n; i++) {
+        cin >> a[i];
+    }
+
+    vector<long long> temp(n);
+
+    ll total_inversions = mergesortandcount(a, temp, 0, n - 1);
+
+    cout << total_inversions << "\n";
+
+    return 0;
+};
