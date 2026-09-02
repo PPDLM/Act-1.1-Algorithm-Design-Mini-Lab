@@ -36,3 +36,38 @@ A brute force subset search is infeasible.
 Your solution should handle the full constraints.
 */
 
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+using ll = long long;
+
+ll solveKnapsack(int n, int T, const vector<int>& time, const vector<ll>& value) {
+    vector<ll> maxScore(T + 1, 0);
+    for (int i = 0; i < n; i++) {
+        for (int w = T; w >= time[i]; w--) {
+            maxScore[w] = max(maxScore[w], maxScore[w - time[i]] + value[i]);
+        };
+    };
+    return maxScore[T];
+}
+
+int main() {
+
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    int n, T;
+    if (!(cin >> n >> T)) return 0;
+
+    vector<int> time(n);
+    vector<ll> value(n);
+    for (int i = 0; i < n; i++) {
+        cin >> time[i] >> value[i];
+    }
+
+    cout << solveKnapsack(n, T, time, value) << "\n";
+
+    return 0;
+}
