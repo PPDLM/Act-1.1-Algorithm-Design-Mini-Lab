@@ -44,7 +44,7 @@ using ll = long long;
 int minMeetingRooms(const vector<pair<long long, long long>>& meetings) {
     vector<pair<long long, int>> events;
     events.reserve(2*meetings.size());
-    for (int i = 0; i < meetings.size(); i++) {
+    for (size_t i = 0; i < meetings.size(); i++) {
         events.push_back({meetings[i].first, 1});
         events.push_back({meetings[i].second, -1});
     };
